@@ -4,9 +4,11 @@ package com.ecomm.UserTest;
 
 
 import java.io.IOException;
-import org.apache.poi.EncryptedDocumentException;
-import org.testng.annotations.Test;
 
+import org.apache.poi.EncryptedDocumentException;
+import org.openqa.selenium.Alert;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import com.ecom.basetest.BaseClass;
 import com.oneclick.ecom.generic.fileutility.ExcelUtility;
 import com.oneclick.ecom.generic.objectrepositoryutility.CreateNewAccountPage;
@@ -15,6 +17,7 @@ import com.oneclick.ecom.generic.webdriverutility.WebDriverUtility;
 
 public class NavigatingtomycartTest extends BaseClass {
 
+	String msg="You are successfully register";
 	@Test
 	public void subcatatoryTest() throws EncryptedDocumentException, IOException {
 	ExcelUtility elib=new ExcelUtility();
@@ -25,7 +28,6 @@ public class NavigatingtomycartTest extends BaseClass {
 	String mobno=elib.getDataFromExcelFile("adminS",19,4);
 	String psw=elib.getDataFromExcelFile("adminS",19,5);
 	String conpsw=elib.getDataFromExcelFile("adminS",19,6);
-	//String msgg=elib.getDataFromExcelFile("adminS",22,1);
 	
 	HomePage hp=new HomePage(driver);
 	hp.getLoginlink().click();
@@ -34,19 +36,27 @@ public class NavigatingtomycartTest extends BaseClass {
 	cnap.CreateNewAccount(fullname, emaill, mobno, psw, conpsw);
 	cnap.getSignupbtn().click();
 	
-	wlib.switchToAlertandAccept(driver);
-	
-	hp.getLogoutBtn().click();
+	//wlib.waitForPagetoLoad(driver);
+	Alert ale = driver.switchTo().alert();
+	String actConfirmation = ale.getText();
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	if (actConfirmation.equals(msg)) {
+		System.out.println("You are successfully registered -> Pass");
+	} else {
+		System.out.println("You are not registered -> Fail");
+	}
+	ale.accept();
+
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

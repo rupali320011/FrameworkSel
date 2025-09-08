@@ -114,7 +114,7 @@ public class InsertProductPage extends BasePage
 	}
 
 
-	public void insertProduct(String category, String subcategory, String productName, String productCompany,
+	public void insertProduct(String category, String productName, String productCompany,
 			String beforeDiscount, String afterDiscount, String productDescription, String productShippingCharge,
 			String availability) throws InterruptedException {
 
@@ -123,8 +123,8 @@ public class InsertProductPage extends BasePage
 		catSelect.selectByVisibleText(category);
 
 		// Select Subcategory
-		Select subcatSelect = new Select(subcategoryDB);
-		subcatSelect.selectByVisibleText(subcategory);
+//		Select subcatSelect = new Select(subcategoryDB);
+//		subcatSelect.selectByVisibleText(subcategory);
 
 		// Fill product details
 		productnameEdt.sendKeys(productName);

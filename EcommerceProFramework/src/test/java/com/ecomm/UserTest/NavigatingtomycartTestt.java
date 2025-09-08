@@ -19,14 +19,10 @@ public class NavigatingtomycartTestt extends BaseClass {
 	ExcelUtility elib=new ExcelUtility();
 	WebDriverUtility wlib=new WebDriverUtility();
 	
-	
-	//String fullname=elib.getDataFromExcelFile("adminS",19,2);
 	String emaill=elib.getDataFromExcelFile("adminS",19,3);
-	//String mobno=elib.getDataFromExcelFile("adminS",19,4);
+	
 	String psw=elib.getDataFromExcelFile("adminS",19,5);
-	//String conpsw=elib.getDataFromExcelFile("adminS",19,6);
-	//String msgg=elib.getDataFromExcelFile("adminS",22,1);
-	//String conmsgg=elib.getDataFromExcelFile("adminS",22,2);
+	
 	
 	HomePage hp=new HomePage(driver);
 	hp.getLoginlink().click();
@@ -47,13 +43,10 @@ public class NavigatingtomycartTestt extends BaseClass {
     elp.getAddtocartbtn().click();
     wlib.switchToAlertandAccept(driver);
     
+    
+    
     hp.getLogoutBtn().click();
-//    String actConfirmation = ale.getText();
-//   boolean status = ale.equals(conmsgg); 
-//	
-//	//assertTrue(status);
-//	ale.accept();
-////	
+
 	
 	
 	

@@ -1,6 +1,9 @@
 package com.ecom.basetest;
 
 import java.io.IOException;
+
+
+
 import java.sql.SQLException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,9 +18,9 @@ import org.testng.annotations.BeforeSuite;
 import com.oneclick.ecom.generic.databaseutility.DatabaseUtility;
 import com.oneclick.ecom.generic.fileutility.ExcelUtility;
 import com.oneclick.ecom.generic.fileutility.PropertyFileUtility;
-import com.oneclick.ecom.generic.objectrepositoryutility.HomePage;
 import com.oneclick.ecom.generic.objectrepositoryutility.UserLoginPage;
 import com.oneclick.ecom.generic.webdriverutility.JavaUtility;
+import com.oneclick.ecom.generic.webdriverutility.UtilityClassObject;
 import com.oneclick.ecom.generic.webdriverutility.WebDriverUtility;
 
 
@@ -57,8 +60,8 @@ public class BaseClass
 		} else {
 			driver = new ChromeDriver();
 			}
-//		sdriver = driver;
-//		UtilityClassObject.setDriver(driver);
+		sdriver = driver;
+		UtilityClassObject.setDriver(driver);
 	}
 	
 	@BeforeMethod(groups = {"smokeTest","regressionTest"})
@@ -66,11 +69,13 @@ public class BaseClass
 	{
 		System.out.println("Login");
 		
-		//UserLoginPage l = new UserLoginPage(driver);
+		UserLoginPage l = new UserLoginPage(driver);
 		String url=plib.getDataFromPropertiesFile("url");
-		String email=plib.getDataFromPropertiesFile("email");
-		String password=plib.getDataFromPropertiesFile("password");
+		//l.logintooApp(url);
+		//String email=plib.getDataFromPropertiesFile("email");
+		//String password=plib.getDataFromPropertiesFile("password");
 		//l.logintoApp(url, email, password);
+		
 		driver.get(url);
 	    driver.manage().window().maximize();	
 	}
@@ -78,9 +83,6 @@ public class BaseClass
 	@AfterMethod(groups = {"smokeTest","regressionTest"})
 	public void configAM()
 	{	
-//		HomePage h = new HomePage(driver);
-//		wdlib.waitForPagetoLoad(driver);
-//		h.getLogoutBtn().click();
 		System.out.println("Logout");
 	} 
 	

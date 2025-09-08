@@ -1,9 +1,7 @@
 package com.ecom.basetest;
 
 import java.io.IOException;
-
 import java.sql.SQLException;
-import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,19 +14,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.oneclick.ecom.generic.databaseutility.DatabaseUtility;
 import com.oneclick.ecom.generic.fileutility.ExcelUtility;
 import com.oneclick.ecom.generic.fileutility.PropertyFileUtility;
-import com.oneclick.ecom.generic.objectrepositoryutility.AdminLoginPage;
-import com.oneclick.ecom.generic.objectrepositoryutility.AdminPage;
-import com.oneclick.ecom.generic.objectrepositoryutility.HomePage;
 import com.oneclick.ecom.generic.objectrepositoryutility.UserLoginPage;
 import com.oneclick.ecom.generic.webdriverutility.JavaUtility;
 import com.oneclick.ecom.generic.webdriverutility.UtilityClassObject;
 import com.oneclick.ecom.generic.webdriverutility.WebDriverUtility;
 
-public class BaseClassAdmin {
-	
+public class Baseclass2 {
+
 	public DatabaseUtility dblib = new DatabaseUtility();
 	public PropertyFileUtility plib = new PropertyFileUtility();
 	public ExcelUtility elib = new ExcelUtility();
@@ -36,21 +34,32 @@ public class BaseClassAdmin {
 	public WebDriverUtility wdlib = new WebDriverUtility();
 	public WebDriver driver;
 	public static WebDriver sdriver;
-
+	public ExtentSparkReporter spark;
+	public ExtentReports report;
+	
+	
 	@BeforeSuite(groups = {"smokeTest","regressionTest"})
-	public void configBS() {
+	public void configBS()
+	{
 		System.out.println("connect to DB , Report Config");
-		dblib.getDBConnection();
+		dblib.getDBConnection(); 
+		spark=new ExtentSparkReporter("./Reportfolder/report3.html");
+		spark.config().setDocumentTitle("ecomm testSuiteResults");
+		spark.config().setReportName("ecomm report");
+		spark.config().setTheme(Theme.DARK);
+		report=new ExtentReports();  //Manages the report (attach reporter, add system info)
+		report.attachReporter(spark);
+		report.setSystemInfo("OS","window-10");
+		report.setSystemInfo("browser","chrome-100");
 	}
-
+	
 	@BeforeClass(groups = {"smokeTest","regressionTest"})
-	public void configBC() throws IOException {
+	public void configBC() throws IOException
+	{
 		System.out.println("launch the browser");
-		//Userclass.test();
-	String browser = plib.getDataFromPropertiesFile("browser");
-//		String browser=System.getProperty("browser");
-//		System.out.println(browser);
-
+		String browser = plib.getDataFromPropertiesFile("browser");
+	
+		
 		if (browser.equals("chrome")) {
 			driver = new ChromeDriver();
 
@@ -61,48 +70,45 @@ public class BaseClassAdmin {
 			driver = new EdgeDriver();
 		} else {
 			driver = new ChromeDriver();
-		}
-//		sdriver = driver;
-//		UtilityClassObject.setDriver(driver);
+			}
+		sdriver = driver;
+		UtilityClassObject.setDriver(driver);
 	}
-
+	
 	@BeforeMethod(groups = {"smokeTest","regressionTest"})
-	public void configBM() throws IOException {
-
-		AdminLoginPage alp = new AdminLoginPage(driver);
-		String url = plib.getDataFromPropertiesFile("url");
-		String adminusn = plib.getDataFromPropertiesFile("adminusn");
-		String adminpwd = plib.getDataFromPropertiesFile("adminpwd");
-//		String url=System.getProperty("url");
-//		String adminusn=System.getProperty("adminusn");
-//		String adminpwd=System.getProperty("adminpwd");
-		//alp.logintoApp1(url, adminusn, adminpwd);
+	public void configBM() throws IOException
+	{
+		System.out.println("Login");
+		
+		UserLoginPage l = new UserLoginPage(driver);
+		String url=plib.getDataFromPropertiesFile("url");
+		//l.logintooApp(url);
+		//String email=plib.getDataFromPropertiesFile("email");
+		//String password=plib.getDataFromPropertiesFile("password");
+		//l.logintoApp(url, email, password);
 		
 		driver.get(url);
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		driver.manage().window().maximize();
-
-		System.out.println("Login");
-
+	    driver.manage().window().maximize();	
 	}
-
+	
 	@AfterMethod(groups = {"smokeTest","regressionTest"})
-	public void configAM() {
-		AdminPage ap = new AdminPage(driver);
-		ap.getLogoutlink().click();
+	public void configAM()
+	{	
 		System.out.println("Logout");
-	}
-
+	} 
+	
 	@AfterClass(groups = {"smokeTest","regressionTest"})
-	public void configAC() {
-		System.out.println("close the browser");
+	public void configAC()
+	{
+		System.out.println("close the browser");	
 		driver.quit();
 	}
-
+	
 	@AfterSuite(groups = {"smokeTest","regressionTest"})
-	public void configAS() throws SQLException {
-		System.out.println("close DB, Report Backup");
+	public void configAS() throws SQLException
+	{
+		System.out.println("close DB, Report Backup");	
 		dblib.closeDBConnection();
-	}
-
 }
+}
+

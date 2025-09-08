@@ -2,9 +2,11 @@ package com.ecomm.adminModuleTest;
 
 import java.io.IOException;
 import org.apache.poi.EncryptedDocumentException;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.ecom.basetest.BaseClassAdmin;
 import com.oneclick.ecom.generic.fileutility.ExcelUtility;
+import com.oneclick.ecom.generic.listenerutility.ListenerImpClass;
 import com.oneclick.ecom.generic.objectrepositoryutility.AdminLoginPage;
 import com.oneclick.ecom.generic.objectrepositoryutility.AdminPage;
 import com.oneclick.ecom.generic.objectrepositoryutility.CreateCategoryPage;
@@ -12,11 +14,12 @@ import com.oneclick.ecom.generic.objectrepositoryutility.InsertProductPage;
 import com.oneclick.ecom.generic.objectrepositoryutility.SubCategoryPage;
 import com.oneclick.ecom.generic.webdriverutility.WebDriverUtility;
 
+@Listeners(ListenerImpClass.class)
 public class NavigatetouserLoginLogTest extends BaseClassAdmin {
 
 	String usernamee="admin";
-	String passwordd="Test@123";
-	@Test(groups = {"systemTest"})
+	String passwordd="admin";
+	@Test(groups = {"smokeTest"})
 	public void loginlogTest() throws EncryptedDocumentException, IOException, InterruptedException {
 		
 		ExcelUtility elib=new ExcelUtility();
@@ -50,7 +53,7 @@ public class NavigatetouserLoginLogTest extends BaseClassAdmin {
 		   
 		   ap.getInsertProductlink().click();
 		   InsertProductPage ipp=new InsertProductPage(driver);
-		   ipp.insertProduct(catagoryname, subcatagory,productname, productcompany, productpriceBD, productpriceAD, productdescription, productshippingcharge, productAvailability);
+		   ipp.insertProduct(catagoryname,productname, productcompany, productpriceBD, productpriceAD, productdescription, productshippingcharge, productAvailability);
 		
 		   ipp.getProductimage1Edt().sendKeys("C:\\Users\\asima\\OneDrive\\Pictures\\Screenshots\\Screenshot 2024-07-04 102627.jpg.png");
 		   ipp.getProductimage2Edt().sendKeys("C:\\Users\\asima\\OneDrive\\Pictures\\Screenshots\\Screenshot 2024-07-04 102627.jpg.png");

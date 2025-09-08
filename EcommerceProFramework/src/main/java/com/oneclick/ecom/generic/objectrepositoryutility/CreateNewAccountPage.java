@@ -63,7 +63,7 @@ public class CreateNewAccountPage
 		wlib.scrolldownBypixel(driver,300);
 		getPasswordEdt().sendKeys(password);
 		getConfirmpasswordEdt().sendKeys(cpassword);
-		signupbtn.click();
+		
 		
 	}
 	

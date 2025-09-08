@@ -100,9 +100,7 @@ public class HomePage
 		searchfieldEdt.sendKeys(productname, Keys.ENTER);	
 	}
 	
-	public void loginTest() {
-		loginlink.click();
-	}
+	
 
 	
 }

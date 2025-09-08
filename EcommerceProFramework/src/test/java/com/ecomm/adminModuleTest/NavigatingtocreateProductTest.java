@@ -1,10 +1,8 @@
 package com.ecomm.adminModuleTest;
 
 import java.io.IOException;
-
 import org.apache.poi.EncryptedDocumentException;
 import org.testng.annotations.Test;
-
 import com.ecom.basetest.BaseClassAdmin;
 import com.oneclick.ecom.generic.fileutility.ExcelUtility;
 import com.oneclick.ecom.generic.objectrepositoryutility.AdminLoginPage;
@@ -17,7 +15,7 @@ import com.oneclick.ecom.generic.webdriverutility.WebDriverUtility;
 public class NavigatingtocreateProductTest extends BaseClassAdmin {
 
 	String usernamee="admin";
-	String passwordd="Test@123";
+	String passwordd="admin";
 	
 	@Test
 	public void createProductTest() throws EncryptedDocumentException, IOException, InterruptedException {
@@ -52,7 +50,7 @@ public class NavigatingtocreateProductTest extends BaseClassAdmin {
 		
 		ap.getInsertProductlink().click();
 		InsertProductPage ipp=new InsertProductPage(driver);
-		 ipp.insertProduct(catagoryname, subcatagory,productname, productcompany, productpriceBD, productpriceAD, productdescription, productshippingcharge, productAvailability);
+		 ipp.insertProduct(catagoryname,productname, productcompany, productpriceBD, productpriceAD, productdescription, productshippingcharge, productAvailability);
 			
 		   ipp.getProductimage1Edt().sendKeys("C:\\Users\\asima\\OneDrive\\Pictures\\Screenshots\\Screenshot 2024-07-04 102627.jpg.png");
 		   ipp.getProductimage2Edt().sendKeys("C:\\Users\\asima\\OneDrive\\Pictures\\Screenshots\\Screenshot 2024-07-04 102627.jpg.png");

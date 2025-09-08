@@ -3,6 +3,7 @@ package com.oneclick.ecom.generic.objectrepositoryutility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 public class AdminPage 
@@ -27,10 +28,10 @@ public class AdminPage
 	@FindBy(xpath = "//a[contains(.,'Manage users')]")
 	private WebElement manageuserslink;
 	
-	@FindBy(xpath = "//a[contains(.,'Create Category')]")
+	@FindBys({@FindBy(xpath = "//a[contains(.,'Create Category')]"),@FindBy(xpath = "(//i[@class='menu-icon icon-tasks'])[1]")})
 	private WebElement createCategorylink;
 	
-	@FindBy(xpath = "//a[contains(.,'Sub Category')]")
+	@FindBy(xpath = "//a[.='Sub Category ']")
 	private WebElement subCategorylink;
 	
 	@FindBy(xpath = "//a[contains(.,'Insert Product')]")

@@ -2,6 +2,7 @@ package com.ecomm.adminModuleTest;
 
 import java.io.IOException;
 
+
 import org.apache.poi.EncryptedDocumentException;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,7 @@ public class NavigatingtosubcatagoryTest extends BaseClassAdmin {
 
 	
    String usernamee="admin";
-   String passwordd="Test@123";
+   String passwordd="admin";
 	@Test
 	public void subcatatoryTest() throws EncryptedDocumentException, IOException {
 	ExcelUtility elib=new ExcelUtility();

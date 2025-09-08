@@ -3,6 +3,9 @@
   <groupId>EcommerceProFramework</groupId>
   <artifactId>EcommerceProFramework</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <profiles>
+  <profile>
+  <id>RT</id>
    <build>
   <plugins>
     <plugin>
@@ -26,6 +29,8 @@
       </plugin>
       </plugins>
   </build>
+  </profile>
+  </profiles>
   <dependencies>
    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
 <dependency>

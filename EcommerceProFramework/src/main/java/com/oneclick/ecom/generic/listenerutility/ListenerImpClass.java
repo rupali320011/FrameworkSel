@@ -30,7 +30,7 @@ public class ListenerImpClass  implements ITestListener, ISuiteListener
 		String d = new Date().toString();
 		String timeStamp = d.replaceAll(":", "-").replaceAll(" ", "_");
 				
-	    spark = new ExtentSparkReporter("./AdvanceReport/report_"+timeStamp+".html");
+	    spark = new ExtentSparkReporter("./Reportfolder/report3_"+timeStamp+".html");
 		spark.config().setDocumentTitle("CRM Test Suite Results");
 		spark.config().setReportName("CRM Report");
 		spark.config().setTheme(Theme.DARK);
@@ -51,8 +51,10 @@ public class ListenerImpClass  implements ITestListener, ISuiteListener
 
 	@Override
 	public void onTestStart(ITestResult result) {
-		System.out.println("===="+result.getMethod().getMethodName()+">====START====");
-	    test = report.createTest(result.getMethod().getMethodName());  
+		System.out.println("===="+result.getMethod().getMethodName()+">====START===="); //gets the name of the currently running test method.
+	    test = report.createTest(result.getMethod().getMethodName()); //creates a new test entry in the ExtentReport with the test method’s name.
+	    //stores the created test object in a utility class (usually a ThreadLocal wrapper) 
+	    //so it can be accessed safely across parallel tests.
 	    UtilityClassObject.setTest(test);
 	    test.log(Status.INFO, result.getMethod().getMethodName()+"===> STARTED <===");
 	}
@@ -75,29 +77,19 @@ public class ListenerImpClass  implements ITestListener, ISuiteListener
 		TakesScreenshot ts = (TakesScreenshot) BaseClass.sdriver;
 		String filepath = ts.getScreenshotAs(OutputType.BASE64);
 		
-		test.addScreenCaptureFromBase64String(filepath,testname +"_"+ time);
+		test.addScreenCaptureFromBase64String(filepath,testname +"_"+ time);  //attaches the screenshot to the ExtentReport.
 	    test.log(Status.FAIL, result.getMethod().getMethodName()+"===> FAILED <===");
-	    test.log(Status.FAIL, result.getThrowable()); 
+	    test.log(Status.FAIL, result.getThrowable()); //logs the exception/error stack trace.
 
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		// TODO Auto-generated method stub
-
+        System.out.println("test case skipped");
 	}
 	
-	@Override
-	public void onStart(ITestContext context) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onFinish(ITestContext context) {
-		// TODO Auto-generated method stub
 	
-	}
 	
 	
 }

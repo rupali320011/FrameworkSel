@@ -49,8 +49,14 @@ public class UserLoginPage
 		passwordEdt.sendKeys(password,Keys.ENTER);
 		
 	}
+	public void logintooApp(String url) {
+		driver.get(url);
+		wdlib.waitForPagetoLoad(driver);
+		wdlib.maximizeWindow(driver);
+	}
 	public void loginToApp1(String emaill,String psw)
 	{
+		
 		emailEdt.sendKeys(emaill);
 		passwordEdt.sendKeys(psw);
 		loginBtn.click();
